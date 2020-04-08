@@ -14,5 +14,17 @@ namespace Spoondrift.Code.Util
         {
             return (T)Enum.Parse(typeof(T), value);
         }
+        public static string RemoveEnd(this string str, string end)
+        {
+            if (str.Length >= end.Length)
+            {
+                var _index = str.LastIndexOf(end);
+                if (_index >= 0)
+                {
+                    return str.Remove(_index);
+                }
+            }
+            return str;
+        }
     }
 }
