@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<DataFormConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="D:\Ataw.Schemas\DataFormConfig.xsd">
+  <Name>RC_Role</Name>
+  <TableName>RC_Role</TableName>
+  <IsExpand>false</IsExpand>
+  <Title>角色</Title>
+  <Columns>
+    <Column IsUniqueKey="false" IsKey="true" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>FID</Name>
+      <DisplayName>编号</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>10</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>RCR_Code</Name>
+      <DisplayName>角色标识</DisplayName>
+      <ControlType>Text</ControlType>
+      <ControlLegal>
+        <Kind>notNull</Kind>
+      </ControlLegal>
+      <Order>20</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>RCR_Name</Name>
+      <DisplayName>角色名称</DisplayName>
+      <ControlType>Text</ControlType>
+      <ControlLegal>
+        <Kind>notNull</Kind>
+      </ControlLegal>
+      <Search IsLike="true"></Search>
+      <Order>30</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>RCR_ProductList</Name>
+      <DisplayName>产品集合</DisplayName>
+      <ControlType>MultiSelector</ControlType>
+      <RegName>RCProductListCodeTable</RegName>
+      <Order>40</Order>
+      <Length>0</Length>
+      <DataType>String</DataType>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>CREATE_ID</Name>
+      <DisplayName>创建人</DisplayName>
+      <ControlType>Selector</ControlType>
+      <RegName>MRPUserCodeData</RegName>
+      <Order>400</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>CREATE_TIME</Name>
+      <DisplayName>创建时间</DisplayName>
+      <ControlType>DateTime</ControlType>
+      <Order>410</Order>
+      <Length>0</Length>
+      <DataType>DateTime</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>UPDATE_ID</Name>
+      <DisplayName>最后编辑人</DisplayName>
+      <ControlType>Selector</ControlType>
+      <RegName>MRPUserCodeData</RegName>
+      <Order>420</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>UPDATE_TIME</Name>
+      <DisplayName>最后编辑时间</DisplayName>
+      <ControlType>DateTime</ControlType>
+      <Order>430</Order>
+      <Length>0</Length>
+      <DataType>DateTime</DataType>
+      <ShowPage>List|Detail</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>ISDELETE</Name>
+      <DisplayName>是否删除</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>440</Order>
+      <Length>0</Length>
+      <DataType>Int</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">     
+      <Name>FControlUnitID</Name>
+      <DisplayName>组织机构</DisplayName>
+      <Navigation IsAvailable="true" IsRefrech="true">
+        <!--Descendant="true"-->
+        <ControlType>TreeSingleNavi</ControlType>
+        <RegName>RCGroupCodeTable</RegName>
+      </Navigation>
+      <ControlType>TreeSingleSelector</ControlType>
+      <RegName>RCGroupCodeTable</RegName>
+      <ControlLegal>
+        <Kind>notNull</Kind>
+      </ControlLegal>
+      <Order>440</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <DefaultValue NeedParse ="true">{ControlUnitID}</DefaultValue>
+      <ShowPage>Insert|List|Update|Delete</ShowPage>     
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>TIMESSTAMP</Name>
+      <DisplayName>时间戳</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>440</Order>
+      <Length>50</Length>
+      <DataType>String</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>UDDATETIME</Name>
+      <DisplayName>备用时间字段</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>440</Order>
+      <Length>0</Length>
+      <DataType>DateTime</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>UDINT1</Name>
+      <DisplayName>备用数值字段</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>440</Order>
+      <Length>0</Length>
+      <DataType>Int</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>UDVARCHAR1</Name>
+      <DisplayName>备用文本字段1</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>440</Order>
+      <Length>0</Length>
+      <DataType>String</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+    <Column IsUniqueKey="false" IsKey="false" IsParentColumn="false" Kind="Data" IsReadOnly="false" ShowType="0" Sortable="false" IsDetailLink="false">
+      <Editor IsAll="false" IsHaveElementPath="false" Width="0" Height="0" />
+      <Report Enable="true" />
+      <Name>UDVARCHAR2</Name>
+      <DisplayName>备用文本字段2</DisplayName>
+      <ControlType>Hidden</ControlType>
+      <Order>440</Order>
+      <Length>0</Length>
+      <DataType>String</DataType>
+      <ShowPage>None</ShowPage>
+      <IsHiddenCol>false</IsHiddenCol>
+      <Score showRateInfo="false" step="false" isDisabled="false" length="0" decimalLength="0" rateMax="0" rateInfosX="0" rateInfosY="0" canRateAgain="false" nbRates="0" average="0" rate="0" />
+    </Column>
+  </Columns>
+</DataFormConfig>

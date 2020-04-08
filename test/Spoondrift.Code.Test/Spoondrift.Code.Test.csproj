@@ -17,9 +17,4 @@
     <ProjectReference Include="..\..\src\Spoondrift.Code\Spoondrift.Code.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="forms\" />
-    <Folder Include="modules\" />
-  </ItemGroup>
-
 </Project>

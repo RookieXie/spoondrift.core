@@ -1,0 +1,26 @@
+<ModuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="D:\Ataw.Schemas\ModuleConfig.xsd">
+  <Mode>Single</Mode>
+  <Title>角色</Title>
+  <Forms>
+    <Form Order="0" Title="角色" Name="RC_Role" TableName="RC_Role" FormType="Grid"   HasSearch="true" File="form\RightCloud\RC_Role.xml" ShowKind="Tile" >
+      <DataPlug>RCRoleDataSource</DataPlug>
+      <ButtonRightPlug>RCRoleButtonRight</ButtonRightPlug>
+      <AfterInitFunName>RCRoleAfterInitFun</AfterInitFunName>
+      <Pager>
+        <PageSize>10</PageSize>
+      </Pager>
+    </Form>
+  </Forms>
+  <Buttons>
+    <Button Name ="GrantRoleRights" Text ="分配权限" IsData ="true" Unbatchable ="false" >
+      <Client>
+        <Function>RoleRightFunc</Function>
+      </Client>
+    </Button>
+  </Buttons>
+  <Scripts>
+    <Script>
+      <Path>/Areas/RightCloud/Scripts/RC/RC_Role.js</Path>
+    </Script>
+  </Scripts>
+</ModuleConfig>
