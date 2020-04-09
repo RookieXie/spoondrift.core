@@ -17,4 +17,13 @@
     <ProjectReference Include="..\..\src\Spoondrift.Code\Spoondrift.Code.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="forms\RC_Role.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="modules\RC_Role.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

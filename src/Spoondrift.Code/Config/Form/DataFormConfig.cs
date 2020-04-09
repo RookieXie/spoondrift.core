@@ -137,8 +137,8 @@ namespace Spoondrift.Code.Config.Form
         {
             try
             {
-                string fpath = Path.Combine("", "",
-                    "form", baseFormFileName);
+                string fpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                    "forms", baseFormFileName);
                 var baseForm = XmlUtil.ReadFromFile<DataFormConfig>(fpath);
                 foreach (var column in baseForm.Columns)
                 {

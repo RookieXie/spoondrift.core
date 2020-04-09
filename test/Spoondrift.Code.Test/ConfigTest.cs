@@ -13,9 +13,12 @@ namespace Spoondrift.Code.Test
         [TestMethod]
         public void ReadFormConfig_Test()
         {
-            var filePath = "";
+            var filePath = "I:\\GitHub\\spoondrift.core\\test\\Spoondrift.Code.Test\\modules\\RC_Role.xml";
             var config = XmlUtil.ReadFromFile<ModuleConfig>(filePath);
-            Assert.Equals(config.FileName,"");
+            config.Forms.ForEach(a => { 
+            
+            });
+            Assert.AreEqual("角色", config.Title);
         }
     }
 }
