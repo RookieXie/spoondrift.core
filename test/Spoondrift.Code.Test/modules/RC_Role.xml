@@ -2,7 +2,7 @@
   <Mode>Single</Mode>
   <Title>角色</Title>
   <Forms>
-    <Form Order="0" Title="角色" Name="RC_Role" TableName="RC_Role" FormType="Grid"   HasSearch="true" File="forms\RC_Role.xml" ShowKind="Tile" >
+    <Form Order="0" Title="角色" Name="RC_Role" TableName="RC_Role" FormType="Grid"   HasSearch="true" File="RC_Role.xml" ShowKind="Tile" >
       <DataPlug>RCRoleDataSource</DataPlug>
       <ButtonRightPlug>RCRoleButtonRight</ButtonRightPlug>
       <AfterInitFunName>RCRoleAfterInitFun</AfterInitFunName>
