@@ -5,7 +5,7 @@ using System.Text;
 namespace Spoondrift.Code.PlugIn
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum, AllowMultiple = false, Inherited = false)]
-    public class CodePlugAttribute : Attribute
+    public class CodePlugAttribute : Attribute,IRegName
     {
         public Type BaseClass
         {
@@ -15,7 +15,7 @@ namespace Spoondrift.Code.PlugIn
         /// <value>只读属性<c>RegName</c>：注册名
         /// </value>
         /// <summary>注册名</summary>
-        public string RegName { get; private set; }
+        public string RegName { get;  set; }
 
         /// <value>属性<c>Description</c>：功能描述
         /// </value>
@@ -35,6 +35,7 @@ namespace Spoondrift.Code.PlugIn
         public PlugInTag[] Tags { get; set; }
         public CodePlugAttribute(string regName)
         {
+            RegName = regName;
         }
     }
 }

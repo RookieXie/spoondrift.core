@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Spoondrift.Code.PlugIn;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
 namespace Spoondrift.Code.Data
 {
-    public abstract class CodeTable<T> : IDisposable
+    public abstract class CodeTable<T> : IDisposable, IRegName
     {
+        public string RegName { get; set; }
         public virtual string Param
         {
             get;
