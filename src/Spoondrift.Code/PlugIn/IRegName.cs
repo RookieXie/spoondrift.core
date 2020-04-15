@@ -7,8 +7,8 @@ namespace Spoondrift.Code.PlugIn
     public interface IRegName
     {
         /// <summary>
-        /// 注册名
+        /// 注册名 为了解析DI的时候使用
         /// </summary>
-        string RegName { get; set; }
+        string CodePlugName { get; set; }
     }
 }

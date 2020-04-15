@@ -6,9 +6,9 @@ namespace Spoondrift.Code.Data
 {
     public class CodeDataModel: ObjectData
     {
-        public string CODE_VALUE { get; set; }
+        public string CodeValue { get; set; }
         private string code_text;
-        public string CODE_TEXT { get { return HtmlDecode(code_text); } set { code_text = value; } }
+        public string CodeText { get { return HtmlDecode(code_text); } set { code_text = value; } }
         public bool IsSelect { get; set; }
         private string HtmlDecode(string str)
         {

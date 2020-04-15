@@ -31,7 +31,7 @@ namespace Spoondrift.Code.Data
 
         public override IEnumerable<CodeDataModel> BeginSearch(DataSet postDataSet, string key)
         {
-            var res = DataList.Where(a => a.Value.CODE_TEXT.IndexOf(key) == 0).Select(a => a.Value);
+            var res = DataList.Where(a => a.Value.CodeText.IndexOf(key) == 0).Select(a => a.Value);
             List<HashCodeDataModel> list = new List<HashCodeDataModel>();
             list.AddRange(res);
             return list;
@@ -53,7 +53,7 @@ namespace Spoondrift.Code.Data
 
         public override IEnumerable<CodeDataModel> Search(DataSet postDataSet, string key)
         {
-            var res = DataList.Where(a => a.Value.CODE_TEXT.Contains(key)).Select(a => a.Value);
+            var res = DataList.Where(a => a.Value.CodeText.Contains(key)).Select(a => a.Value);
             List<HashCodeDataModel> list = new List<HashCodeDataModel>();
             list.AddRange(res);
             return list;
@@ -61,6 +61,6 @@ namespace Spoondrift.Code.Data
     }
     public class HashCodeDataModel : CodeDataModel
     {
-        public string CODE_NAME { get; set; }
+        public string CodeName { get; set; }
     }
 }

@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Text;
 
 namespace Spoondrift.Code.Data
 {
-    public class ObjectData
+    public class ObjectDataView
     {
-        public HashSet<string> MODEFY_COLUMNS
-        {
-            get;
-            set;
-        }
-        public DataRow Row
+        public ObjectData objectData
         {
             get;
             set;
         }
 
-        public string BUTTON_RIGHT
+        public string KeyId
         {
             get;
             set;

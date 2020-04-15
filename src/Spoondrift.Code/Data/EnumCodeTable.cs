@@ -22,11 +22,11 @@ namespace Spoondrift.Code.Data
                 {
                     var cdm = new HashCodeDataModel()
                     {
-                        CODE_VALUE = en.Value<int>().ToString(),
-                        CODE_TEXT = en.GetDescription(),
-                        CODE_NAME = en.ToString(),
+                        CodeValue = en.Value<int>().ToString(),
+                        CodeText = en.GetDescription(),
+                        CodeName = en.ToString(),
                     };
-                    DataList.Add(cdm.CODE_VALUE, cdm);
+                    DataList.Add(cdm.CodeValue, cdm);
                 }
                 else
                 {
@@ -34,21 +34,21 @@ namespace Spoondrift.Code.Data
                     {
                         var cdm2 = new HashCodeDataModel()
                         {
-                            CODE_VALUE = en.Value<int>().ToString(),
-                            CODE_TEXT = en.GetDescription(),
-                            CODE_NAME = en.ToString(),
+                            CodeValue = en.Value<int>().ToString(),
+                            CodeText = en.GetDescription(),
+                            CodeName = en.ToString(),
                         };
-                        DataList.Add(cdm2.CODE_VALUE, cdm2);
+                        DataList.Add(cdm2.CodeValue, cdm2);
                     }
                     else
                     {
                         var cdm = new HashCodeDataModel()
                         {
-                            CODE_VALUE = en.Value<int>().ToString(),
-                            CODE_TEXT = en.GetDescription(),
-                            CODE_NAME = en.ToString(),
+                            CodeValue = en.Value<int>().ToString(),
+                            CodeText = en.GetDescription(),
+                            CodeName = en.ToString(),
                         };
-                        DataList.Add(cdm.CODE_VALUE, cdm);
+                        DataList.Add(cdm.CodeValue, cdm);
                     }
                 }
                 // AtawAppContext.Current.AtawCache.Set<EnumCodeDataModel>(KEY_NAME + en.Value<int>().ToString(), cdm);
@@ -62,7 +62,7 @@ namespace Spoondrift.Code.Data
         {
             foreach (var item in DataList)
             {
-                if (item.Key != "0" || item.Value.CODE_NAME.ToUpper() != "NONE")
+                if (item.Key != "0" || item.Value.CodeName.ToUpper() != "NONE")
                 {
                     yield return item.Value;
                 }
@@ -77,7 +77,7 @@ namespace Spoondrift.Code.Data
         {
             foreach (var item in DataList)
             {
-                if (item.Key != "0" || item.Value.CODE_NAME.ToUpper() != "NONE")
+                if (item.Key != "0" || item.Value.CodeName.ToUpper() != "NONE")
                 {
                     yield return item.Value;
                 }

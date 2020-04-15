@@ -8,7 +8,7 @@ namespace Spoondrift.Code.Data
 {
     public abstract class CodeTable<T> : IDisposable, IRegName
     {
-        public string RegName { get; set; }
+        public string CodePlugName { get; set; }
         public virtual string Param
         {
             get;

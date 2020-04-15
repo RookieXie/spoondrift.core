@@ -53,8 +53,8 @@ namespace Spoondrift.Code.PlugIn
             {
                 var plug = new PlugInModel
                 {
-                    Name = code.RegName,
-                    Key = code.RegName,
+                    Name = code.CodePlugName,
+                    Key = code.CodePlugName,
                     Author = code.Author,
                     CreateDate = code.CreateDate,
                     Description = code.Description,
@@ -66,7 +66,7 @@ namespace Spoondrift.Code.PlugIn
                 if (type.IsEnum)
                 {
                     EnumCodeTable ect = new EnumCodeTable(type);
-                    ect.RegName = code.RegName;//标识唯一性
+                    ect.CodePlugName = code.CodePlugName;//标识唯一性
                     plug.InstanceType = type;
                     plug.BaseType = typeof(CodeTable<CodeDataModel>);
                     services.AddTransient<CodeTable<CodeDataModel>>(p =>
@@ -78,12 +78,16 @@ namespace Spoondrift.Code.PlugIn
                 {
                     try
                     {
-
-                        var iReg = (IRegName)type;
-                        iReg.RegName = code.RegName;//标识唯一性
-                        plug.InstanceType = type;
+                        //IRegName iReg = (IRegName)type;
+                        //iReg.CodePlugName = code.CodePlugName;//标识唯一性
+                       
+                        plug.InstanceType =type;
                         plug.BaseType = code.BaseClass;
-                        services.AddTransient(code.BaseClass, type);
+                        services.AddTransient(code.BaseClass, (p)=> {
+                            object obj = Activator.CreateInstance(type, p);
+                            type.GetProperty("CodePlugName").SetValue(obj, code.CodePlugName);
+                            return obj;
+                        });
 
                     }
                     catch (Exception ex)
@@ -96,12 +100,12 @@ namespace Spoondrift.Code.PlugIn
         }
         private static void Log(PlugInModel plug)
         {
-            string log = $"注册名：{plug.RegName}\r\n基类:{plug.InstanceType.ToString()}\r\n实例类:{ plug.BaseType.ToString()}\r\n路径:{3}\r\n作者:{ plug.Author}\r\n描述:{ plug.Description}";
+            string log = $"注册名：{plug.Name}\r\n基类:{plug.InstanceType.ToString()}\r\n实例类:{ plug.BaseType.ToString()}\r\n路径:{3}\r\n作者:{ plug.Author}\r\n描述:{ plug.Description}";
             Console.WriteLine(log);
         }
         public static T GetCodePlugService<T>(this IServiceProvider provider, string regName) where T : IRegName
         {
-            return provider.GetServices<T>().Where(a => a.RegName == regName).FirstOrDefault();
+            return provider.GetServices<T>().Where(a => a.CodePlugName == regName).FirstOrDefault();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Spoondrift.Code.Test
             var services = new ServiceCollection();
             services.AddCodePlugService();
             var codeTable=services.BuildServiceProvider().GetCodePlugService<CodeTable<CodeDataModel>>("FormType");
-            Console.WriteLine(codeTable.RegName);
+            Console.WriteLine(codeTable.CodePlugName);
         }
     }
 }

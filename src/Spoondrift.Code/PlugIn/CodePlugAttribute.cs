@@ -15,7 +15,7 @@ namespace Spoondrift.Code.PlugIn
         /// <value>只读属性<c>RegName</c>：注册名
         /// </value>
         /// <summary>注册名</summary>
-        public string RegName { get;  set; }
+        public string CodePlugName { get;  set; }
 
         /// <value>属性<c>Description</c>：功能描述
         /// </value>
@@ -33,9 +33,9 @@ namespace Spoondrift.Code.PlugIn
         public string CreateDate { get; set; }
 
         public PlugInTag[] Tags { get; set; }
-        public CodePlugAttribute(string regName)
+        public CodePlugAttribute(string codePlugName)
         {
-            RegName = regName;
+            CodePlugName = codePlugName;
         }
     }
 }

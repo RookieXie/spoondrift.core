@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Spoondrift.Code.Data;
+using Spoondrift.Code.PlugIn;
+using Spoondrift.Code.Util;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -102,7 +106,7 @@ namespace Spoondrift.Code.Config.Form
 
         //public MacroConfig DefaultValue { get; set; }
 
-        //public SelectorConfig Selector { get; set; }
+        public SelectorConfig Selector { get; set; }
 
 
        // public MarkDownConfig MarkDown { get; set; }
@@ -110,9 +114,9 @@ namespace Spoondrift.Code.Config.Form
 
         //public AmountConfig Amount { get; set; }
 
-       // public SearchConfig Search { get; set; }
+        public SearchConfig Search { get; set; }
 
-        //public ControlLegalConfig ControlLegal { get; set; }
+        public ControlLegalConfig ControlLegal { get; set; }
 
         public string DetialFormatFun { get; set; }
 
@@ -120,26 +124,26 @@ namespace Spoondrift.Code.Config.Form
 
         //public TreeConfig TreeConfig { get; set; }
 
-       //public NavigationConfig Navigation { get; set; }
+        public NavigationConfig Navigation { get; set; }
 
         //public ScoreConfig Score { get; set; }
 
-        //public string GetValue(DataRow row)
-        //{
-        //    string _val = row[Name].ToString();
-        //    if (!_val.IsEmpty())
-        //    {
-        //        if (!RegName.IsEmpty())
-        //        {
-        //            var ioc = RegName.SingletonByPage<CodeTable<CodeDataModel>>();
-        //            if (ioc != null)
-        //            {
-        //                return ioc[_val].CODE_TEXT;
-        //            }
-        //        }
-        //    }
-        //    return _val;
-        //}
+        public string GetValue(DataRow row, IServiceProvider provider)
+        {
+            string _val = row[Name].ToString();
+            if (!_val.IsEmpty())
+            {
+                if (!RegName.IsEmpty())
+                {
+                    var ioc = provider.GetCodePlugService<CodeTable<CodeDataModel>>(RegName);
+                    if (ioc != null)
+                    {
+                        return ioc[_val].CodeText;
+                    }
+                }
+            }
+            return _val;
+        }
 
         //public AtawInnerPageConfig AtawInnerPage { get; set; }
         public string LinkFormat { get; set; }
