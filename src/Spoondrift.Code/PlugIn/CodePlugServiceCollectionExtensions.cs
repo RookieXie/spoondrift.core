@@ -65,8 +65,10 @@ namespace Spoondrift.Code.PlugIn
 
                 if (type.IsEnum)
                 {
-                    EnumCodeTable ect = new EnumCodeTable(type);
-                    ect.CodePlugName = code.CodePlugName;//标识唯一性
+                    EnumCodeTable ect = new EnumCodeTable(type)
+                    {
+                        CodePlugName = code.CodePlugName//标识唯一性
+                    };
                     plug.InstanceType = type;
                     plug.BaseType = typeof(CodeTable<CodeDataModel>);
                     services.AddTransient<CodeTable<CodeDataModel>>(p =>

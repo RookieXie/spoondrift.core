@@ -18,9 +18,7 @@ namespace Spoondrift.Code.Data
     public abstract class BaseDataTableSource : ListDataTable
     {
         public const string REG_NAME = "DataTableSource";
-        public const string PAGE_SQL = "select * from ( "
-                                     + "select row_number() over(order by {1} ) rn,{0} from {2} WHERE 1=1 {3})"
-                                     + "tb where rn >(@PageNo)*@pageSize and rn <=(@PageNo + 1)*@pageSize";
+        public const string PAGE_SQL = "select *  from {2} WHERE 1=1 {3} limit @skip,@pageSize";
 
        
 
@@ -376,7 +374,7 @@ namespace Spoondrift.Code.Data
                 {
                     InitializeDataSet();
                     fList = new List<ObjectData>();
-                    DataTable dt = DataSet.Tables["Table"];
+                    DataTable dt = DataSet.Tables[0];
                     dt.TableName = RegName;
                     var rows = dt.Rows;
                     // Pagination.TotalCount = rows.Count;
@@ -808,7 +806,7 @@ namespace Spoondrift.Code.Data
         private void SetSqlSelect()
         {
             string where = "";
-           DynamicParameters sqlList = new DynamicParameters();
+            DynamicParameters sqlList = new DynamicParameters();
             if (KeyValues.Count() == 0)
             {
                 string searchTable = RegName + "_SEARCH";
@@ -865,7 +863,7 @@ namespace Spoondrift.Code.Data
                     orderName = Pagination.SortName + " DESC";
             }
             paraList = new DynamicParameters();
-            sqlList.ObjectClone(paraList);
+            paraList = sqlList;
             //foreach (var qsql in sqlList)//对象克隆，防止参数重复
             //{
             //    SqlParameter sqlP = new SqlParameter();
@@ -873,7 +871,7 @@ namespace Spoondrift.Code.Data
             //    paraList.Add(sqlP);
             //}
             sql = string.Format(CultureInfo.CurrentCulture, PAGE_SQL, _selectStr, orderName, SetSelectTable(RegName), where);
-            paraList.Add("@PageNo",Pagination.PageIndex );
+            paraList.Add("@skip",Pagination.PageIndex );
             paraList.Add("@pageSize",Pagination.PageSize);
         }
 

@@ -299,6 +299,7 @@ namespace Spoondrift.Code.Dapper
         }
         public DataSet QueryDataSet(string sqlString, DynamicParameters cmdParms)
         {
+            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             var conn = Connection;
             if (conn.State != ConnectionState.Open)
@@ -307,14 +308,16 @@ namespace Spoondrift.Code.Dapper
             }
             var reader = conn.ExecuteReader(sqlString, cmdParms);
             dt.Load(reader);
+            ds.Tables.Add(dt);
             if (conn != null)
                 conn.Close();
-            return dt.DataSet;
+            return ds;
 
 
         }
         public DataSet QueryDataSet(string sqlString)
         {
+            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             var conn = Connection;
             if (conn.State != ConnectionState.Open)
@@ -323,9 +326,10 @@ namespace Spoondrift.Code.Dapper
             }
             var reader = conn.ExecuteReader(sqlString);
             dt.Load(reader);
+            ds.Tables.Add(dt);
             if (conn != null)
                 conn.Close();
-            return dt.DataSet;
+            return ds;
         }
 
 
