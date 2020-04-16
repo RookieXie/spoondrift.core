@@ -29,7 +29,7 @@ namespace Spoondrift.Code.Test
             });
             services.AddScoped<Xml2DB>();
             var provide = services.BuildServiceProvider();
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules", "RC_Role.xml"); 
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "modules", "RC_Role.xml");
             var config = XmlUtil.ReadFromFile<ModuleConfig>(filePath);
 
             config.Forms.Cast<FormConfig>().ToList().ForEach(a =>
@@ -37,7 +37,7 @@ namespace Spoondrift.Code.Test
                     IListDataTable dt = provide.GetCodePlugService<IListDataTable>(a.DataPlug);
                     var formPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "forms", a.File);
                     var dataForm = XmlUtil.ReadFromFile<DataFormConfig>(formPath);
-                    var xml2Db=services.BuildServiceProvider().GetService<Xml2DB>();
+                    var xml2Db = services.BuildServiceProvider().GetService<Xml2DB>();
                     xml2Db.Migrations(dataForm);//创建表               //dt.Initialize();
                     var postDataSet = new DataSet();
                     dt.Initialize(new ModuleFormInfo(postDataSet, 10, "", "",
@@ -48,7 +48,7 @@ namespace Spoondrift.Code.Test
                     var dataTable = data.Tables[a.Name];
                     foreach (DataRow item in dataTable.Rows)
                     {
-                        Console.WriteLine(item["FID"]);
+                        // Console.WriteLine(item["FID"]);
                         var fid = item["FID"];
                     }
                     //Console.WriteLine(dataForm.Name);
