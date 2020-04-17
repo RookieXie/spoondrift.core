@@ -11,6 +11,10 @@ namespace Spoondrift.Code.PlugIn
 {
     public static class CodePlugServiceCollectionExtensions
     {
+        /// <summary>
+        /// 加载插件
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddCodePlugService(this IServiceCollection services)
         {
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -29,18 +33,25 @@ namespace Spoondrift.Code.PlugIn
         }
         private static List<Assembly> LoadAssemblys()
         {
+            string[] filters =
+            {
+                "mscorlib",
+                "netstandard",
+                "dotnet",
+                "api-ms-win-core",
+                "runtime.",
+                "System",
+                "Microsoft",
+                "Window",
+            };
             List<Assembly> assemblies = new List<Assembly>();
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             Console.WriteLine("根目录：" + currentDirectory);
-            foreach (string dllPath in Directory.GetFiles(currentDirectory, "*.dll"))//还过滤掉不需要的dll
+            foreach (string dllPath in Directory.GetFiles(currentDirectory, "*.dll"))
             {
                 var an = AssemblyName.GetAssemblyName(dllPath);
                 var assembly = AppDomain.CurrentDomain.Load(an);
-                if (assembly.FullName.Contains("Microsoft") || assembly.FullName.Contains("Newtonsoft") || assembly.FullName.Contains("System"))
-                {
-
-                }
-                else
+                if (!filters.Any(assembly.FullName.StartsWith))//过滤掉不需要的dll
                 {
                     assemblies.Add(assembly);
                 }
@@ -80,14 +91,11 @@ namespace Spoondrift.Code.PlugIn
                 {
                     try
                     {
-                        //IRegName iReg = (IRegName)type;
-                        //iReg.CodePlugName = code.CodePlugName;//标识唯一性
-                       
                         plug.InstanceType =type;
                         plug.BaseType = code.BaseClass;
                         services.AddTransient(code.BaseClass, (p)=> {
                             object obj = Activator.CreateInstance(type, p);
-                            type.GetProperty("CodePlugName").SetValue(obj, code.CodePlugName);
+                            type.GetProperty("CodePlugName").SetValue(obj, code.CodePlugName); //标识唯一性
                             return obj;
                         });
 
@@ -105,6 +113,13 @@ namespace Spoondrift.Code.PlugIn
             string log = $"注册名：{plug.Name}\r\n基类:{plug.InstanceType.ToString()}\r\n实例类:{ plug.BaseType.ToString()}\r\n路径:{3}\r\n作者:{ plug.Author}\r\n描述:{ plug.Description}";
             Console.WriteLine(log);
         }
+        /// <summary>
+        /// 解析插件信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="provider"></param>
+        /// <param name="regName"></param>
+        /// <returns></returns>
         public static T GetCodePlugService<T>(this IServiceProvider provider, string regName) where T : IRegName
         {
             return provider.GetServices<T>().Where(a => a.CodePlugName == regName).FirstOrDefault();
