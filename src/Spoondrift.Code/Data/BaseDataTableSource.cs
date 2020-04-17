@@ -11,6 +11,7 @@ using Spoondrift.Code.Dapper;
 using Dapper;
 using Spoondrift.Code.Config.Form;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace Spoondrift.Code.Data
 {
@@ -24,13 +25,16 @@ namespace Spoondrift.Code.Data
 
         private string fRegName;
         private string fPrimaryKey;
-
+        /// <summary>
+        /// 请求上下文 获取当前登录人信息使用
+        /// </summary>
+        protected IHttpContextAccessor httpContextAccessor { get; }
         private IUnitOfDapper fDbContext;
         protected IServiceProvider provider;
         public BaseDataTableSource(IServiceProvider serviceProvider)
         {
             provider = serviceProvider;
-
+            httpContextAccessor = provider.GetService<IHttpContextAccessor>();
 
             //PageItems = AtawAppContext.Current.PageFlyweight.PageItems;
             //if (!DataXmlPath.IsEmpty())
@@ -1035,7 +1039,7 @@ namespace Spoondrift.Code.Data
 
         protected virtual string CreatePhyDeleteSql(string key, DynamicParameters sqlList)
         {
-            string sql = " DELETE  FROM {0} WHERE {1}=@key AND 1=1 ";
+            string sql = " DELETE  FROM {0} WHERE {1}=@key ";
 
             sqlList.Add("@key", key);
             //sql = string.Format(CultureInfo.CurrentCulture, sql, RegName, PrimaryKey, key);
