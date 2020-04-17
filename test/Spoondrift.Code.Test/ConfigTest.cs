@@ -44,7 +44,7 @@ namespace Spoondrift.Code.Test
                      a.TableName, dataForm.PrimaryKey, "", false, dataForm, a.OrderSql, a));
                     var list = dt.List;
                     var data = new DataSet();
-                    dt.AppendTo(data);
+                    dt.AppendTo(data);//数据获取
                     var dataTable = data.Tables[a.Name];
                     foreach (DataRow item in dataTable.Rows)
                     {
