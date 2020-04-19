@@ -46,7 +46,7 @@ namespace Spoondrift.Code.PageView
         //public Dictionary<string, AtawSeaFormConfigView> SeaForms { get; set; }
         //public Dictionary<string, AtawMvcFormConfigView> MvcForms { get; set; }
        // public Dictionary<string, AtawScriptFormConfigView> ScriptForms { get; set; }
-        //public List<PanelList> Layout { get; set; }
+        public List<PanelList> Layout { get; set; }
 
         public IDictionary<string, CustomButtonConfigView> DataButtons { get; set; }
         public IDictionary<string, CustomButtonConfigView> PageButtons { get; set; }

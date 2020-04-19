@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using Spoondrift.Code.Config;
 using Spoondrift.Code.Config.Form;
 using Spoondrift.Code.Dapper;
 using Spoondrift.Code.Data;
+using Spoondrift.Code.PageView.PagePlug;
 using Spoondrift.Code.PlugIn;
 using Spoondrift.Code.Util;
 using System;
@@ -53,6 +55,10 @@ namespace Spoondrift.Code.Test
                     }
                     //Console.WriteLine(dataForm.Name);
                 });
+
+            AtawBasePageViewCreator pageCreator = provide.GetCodePlugService<AtawBasePageViewCreator>("ListPageView");
+            pageCreator.Initialize(config, JsonConvert.DeserializeObject<DataSet>(""), null, "", false);
+            var apcv = pageCreator.Create();
             Assert.AreEqual("角色", config.Title);
         }
     }

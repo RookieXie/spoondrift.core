@@ -151,7 +151,7 @@ namespace Spoondrift.Code.Config.Form
         public string NormalStyle { get; set; }
 
         public string Width { get; set; }
-
+        public string Height { get; set; }
         public string TdStyle { get; set; }
 
         /// <summary>

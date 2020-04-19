@@ -27,7 +27,7 @@ namespace Spoondrift.Code.Util
 
         public static XmlReader GetXmlReader(string path)
         {
-            
+
 
             XmlReader reader = XmlReader.Create(new Uri(path).ToString(), ReaderSetting);
             return reader;
@@ -35,7 +35,7 @@ namespace Spoondrift.Code.Util
 
         public static XmlReader GetXmlReader(Stream stream)
         {
-            
+
 
             XmlReader reader = XmlReader.Create(stream, ReaderSetting);
             return reader;
@@ -121,7 +121,24 @@ namespace Spoondrift.Code.Util
                 return obj;
             }
         }
+        public static T PlugGetXml<T>(this string name)
+        {
+            name = name.ToUpper();
 
+
+            if (name.IndexOf("@") >= 0)
+            {
+                name = name.Replace(".XML", "");
+                string[] arr = name.Split('@');
+                string xml = arr[0];
+                name = xml + ".XML";
+            }
+
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name);
+            object obj = XmlUtil.ReadFromFile(path, typeof(T));
+            return (T)obj;
+
+        }
 
         public static T ReadFromFile<T>(string filePath)
              where T : XmlConfigBase, new()

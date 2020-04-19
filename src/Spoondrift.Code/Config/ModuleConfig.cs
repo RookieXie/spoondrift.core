@@ -37,11 +37,11 @@ namespace Spoondrift.Code.Config
        // [XmlArrayItem(Type = typeof(ScriptFormConfig), ElementName = "ScriptForm")]
         public List<BaseFormConfig> Forms { get; set; }
 
-       //[XmlArrayItem("Relation")]
-        //public List<RelationConfig> Relations { get; set; }
+        [XmlArrayItem("Relation")]
+        public List<RelationConfig> Relations { get; set; }
 
-       // [XmlArrayItem("Button")]
-        //public List<CustomButtonConfig> Buttons { get; set; }
+        [XmlArrayItem("Button")]
+        public List<CustomButtonConfig> Buttons { get; set; }
 
         public RightConfig Right { get; set; }
 

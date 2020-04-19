@@ -43,7 +43,7 @@ namespace Spoondrift.Code.PageView
 
         //public AmountConfig Amount { get; set; }
 
-        //public ChangerViewConfig Changer { get; set; }
+        public ChangerViewConfig Changer { get; set; }
 
         public string LinkFormat { get; set; }
 
