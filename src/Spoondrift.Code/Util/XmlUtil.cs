@@ -134,7 +134,7 @@ namespace Spoondrift.Code.Util
                 name = xml + ".XML";
             }
 
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name);
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"forms", name);
             object obj = XmlUtil.ReadFromFile(path, typeof(T));
             return (T)obj;
 

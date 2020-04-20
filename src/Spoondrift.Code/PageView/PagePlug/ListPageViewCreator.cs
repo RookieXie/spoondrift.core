@@ -6,19 +6,19 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView.PagePlug
 {
-    [CodePlug("ListPageView", BaseClass = typeof(AtawBasePageViewCreator),
+    [CodePlug("ListPageView", BaseClass = typeof(BasePageViewCreator),
          CreateDate = "2012-11-19", Author = "sj", Description = "ListPageView创建插件")]
-    public class AtawListPageViewCreator : AtawBasePageViewCreator
+    public class ListPageViewCreator : BasePageViewCreator
     {
-        private AtawListPageConfigView fListPageConfigView;
-        public AtawListPageViewCreator(IServiceProvider serviceProvider) : base(serviceProvider)
+        private ListPageConfigView fListPageConfigView;
+        public ListPageViewCreator(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            fListPageConfigView = new AtawListPageConfigView();
+            fListPageConfigView = new ListPageConfigView();
             BasePageView = fListPageConfigView;
             PageStyle = Config.PageStyle.List;
         }
 
-        public override AtawPageConfigView Create()
+        public override PageConfigView Create()
         {
             var pageView = base.Create();
             if (pageView.Header.IsValid)
@@ -32,16 +32,16 @@ namespace Spoondrift.Code.PageView.PagePlug
             }
             return pageView;
         }
-        //private AtawFormConfigView CreateSearchFormView()
+        //private FormConfigView CreateSearchFormView()
         //{
-        //    AtawFormConfigView formView = new AtawFormConfigView();
+        //    FormConfigView formView = new FormConfigView();
         //    formView.FormType = FormType.Normal;
         //    formView.ShowKind = ShowKind.Tile;
         //    formView.TableName = FormViews.First().Value.TableName;
         //    formView.PrimaryKey = FormViews.First().Value.PrimaryKey;
         //    formView.Title = FormViews.First().Value.Title + "查询";
         //    formView.Name = FormViews.First().Key + "_SEARCH";
-        //    formView.Columns = new List<AtawColumnConfigView>();
+        //    formView.Columns = new List<ColumnConfigView>();
         //    bool IsSearch = false;
         //    foreach (var column in FormInfoList.First().DataForm.Columns)
         //    {
@@ -54,9 +54,9 @@ namespace Spoondrift.Code.PageView.PagePlug
         //    return IsSearch ? formView : null;
         //}
 
-        //private void CreateSearchColumn(AtawFormConfigView formView, ColumnConfig column)
+        //private void CreateSearchColumn(FormConfigView formView, ColumnConfig column)
         //{
-        //    AtawColumnConfigView colView = new AtawColumnConfigView();
+        //    ColumnConfigView colView = new ColumnConfigView();
         //    if (column.ControlType == ControlType.Detail)
         //        colView.ControlType = ControlType.Text;
         //    else
@@ -70,7 +70,7 @@ namespace Spoondrift.Code.PageView.PagePlug
         //    colView.Name = column.Name;
         //    string controlRegname = column.ControlType.ToString();
         //    // to.Options 
-        //    var optionCreator = controlRegname.PlugIn<AtawOptionCreator>();
+        //    var optionCreator = controlRegname.PlugIn<OptionCreator>();
         //    //初始化
         //    optionCreator.Initialize(BasePageView, formView, column, PageStyle.None);
         //    //方法调用
@@ -94,7 +94,7 @@ namespace Spoondrift.Code.PageView.PagePlug
         //        formView.Columns.Add(colView);
         //}
 
-        //public override AtawPageConfigView Create()
+        //public override PageConfigView Create()
         //{
         //    var pageView = base.Create();
         //    fListPageConfigView.SearchFormName = FormViews.First().Key + "_SEARCH";

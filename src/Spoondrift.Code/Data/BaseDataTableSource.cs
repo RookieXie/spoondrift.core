@@ -36,7 +36,7 @@ namespace Spoondrift.Code.Data
             provider = serviceProvider;
             httpContextAccessor = provider.GetService<IHttpContextAccessor>();
 
-            //PageItems = AtawAppContext.Current.PageFlyweight.PageItems;
+            //PageItems = AppContext.Current.PageFlyweight.PageItems;
             //if (!DataXmlPath.IsEmpty())
             //    DataFormConfig = DataXmlPath.PlugInPageGet<DataFormConfig>();
         }
@@ -73,7 +73,7 @@ namespace Spoondrift.Code.Data
                     strs.Add(_str);
                 }
             }
-            // AtawDebug.ThrowImpossibleCode(this);
+            // Debug.ThrowImpossibleCode(this);
             return strs;
         }
 
@@ -533,7 +533,7 @@ namespace Spoondrift.Code.Data
                         }
                         //根据配置的column.RegName和输入的关键字val查询
                         var dt = provider.GetCodePlugService<CodeTable<CodeDataModel>>(rN);
-                        //as TreeCodeTable; AtawIocContext.Current.FetchInstance<CodeTable<CodeDataModel>>(rN);
+                        //as TreeCodeTable; IocContext.Current.FetchInstance<CodeTable<CodeDataModel>>(rN);
                         string sql = "";
                         if ((dt as SingleCodeTable<CodeDataModel>) != null && (dt as SingleCodeTable<CodeDataModel>).TableName != null && (dt as SingleCodeTable<CodeDataModel>).TextField != null && (dt as SingleCodeTable<CodeDataModel>).ValueField != null)
                         {
@@ -799,7 +799,7 @@ namespace Spoondrift.Code.Data
             sb.AppendLine(sql);
             sb.AppendLine(Environment.NewLine);
             //DBUtil.DbCommandToString(paraList.ToList(), sb);
-            //AtawTrace.WriteCustomFile("BaseDataTableSource", sb.ToString());
+            //Trace.WriteCustomFile("BaseDataTableSource", sb.ToString());
 
             DataSet = DbContext.QueryDataSet(sql, paraList);
             //设置外键的值
@@ -882,7 +882,7 @@ namespace Spoondrift.Code.Data
         protected virtual string ChangeForeignKeyValue(string value)
         {
             //string __relationKey = "_foreignkey_{0}_{1}".SFormat(_relation.MasterForm, _relation.MasterField);
-            //AtawAppContext.Current.SetItem(__relationKey, _value);
+            //AppContext.Current.SetItem(__relationKey, _value);
             return value;
         }
 
@@ -1082,7 +1082,7 @@ namespace Spoondrift.Code.Data
                     string val = "";
                     if (col == PrimaryKey)
                     {
-                        //AtawDebug.AssertArgument(!hasPriKey, col, string.Format(CultureInfo.CurrentCulture, "表{0}主键只能有一个", RegName), this);
+                        //Debug.AssertArgument(!hasPriKey, col, string.Format(CultureInfo.CurrentCulture, "表{0}主键只能有一个", RegName), this);
                         hasPriKey = true;
                         val = key;
                         // FileID = "";

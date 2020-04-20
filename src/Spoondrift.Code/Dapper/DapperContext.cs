@@ -111,7 +111,7 @@ namespace Spoondrift.Code.Dapper
         public StringBuilder LogCommand(StringBuilder sb)
         {
             //sb.AppendLine("_一个子工作单元");
-            //bool _islog = LogSaveAtawChanges();
+            //bool _islog = LogSaveChanges();
             //if (_islog || !IsChildUnit)
             //{
             //    if ((CommandItems != null && CommandItems.Count > 0))
@@ -128,16 +128,16 @@ namespace Spoondrift.Code.Dapper
         }
 
         // public void 
-        private bool IsSaveAtawChanges = false;
+        private bool IsSaveChanges = false;
 
-        private bool LogSaveAtawChanges()
+        private bool LogSaveChanges()
         {
             //try
             //{
-            //    if (!IsSaveAtawChanges)
+            //    if (!IsSaveChanges)
             //    {
-            //        IsSaveAtawChanges = true;
-            //        SaveAtawChanges();
+            //        IsSaveChanges = true;
+            //        SaveChanges();
             //    }
             //    else
             //        return false;//已经被记录过了
@@ -148,9 +148,9 @@ namespace Spoondrift.Code.Dapper
             //    //    dbEx.EntityValidationErrors.Select(
             //    //    a => string.Join("-", a.ValidationErrors.Select(b => b.ErrorMessage),"-实体:",a.Entry.Entity.ToString(),"-状态",a.Entry.State.ToString())
             //    //    ),Environment.NewLine);
-            //    //exx = exx + AtawAppContext.Current.FastJson.ToJSON(dbEx.EntityValidationErrors);
+            //    //exx = exx + AppContext.Current.FastJson.ToJSON(dbEx.EntityValidationErrors);
             //    string exx = this.logDbEx(dbEx);
-            //    AtawTrace.WriteFile(LogType.EfErrot, exx);
+            //    Trace.WriteFile(LogType.EfErrot, exx);
             //    throw dbEx;
             //}
 
@@ -169,7 +169,7 @@ namespace Spoondrift.Code.Dapper
         public int ADOSubmit()
         {
 
-            bool _haslog = LogSaveAtawChanges();//是否需要记录日志
+            bool _haslog = LogSaveChanges();//是否需要记录日志
 
             var con = Connection;
             //check
@@ -209,7 +209,7 @@ namespace Spoondrift.Code.Dapper
                             }
                             //if (!IsChildUnit)
                             //{
-                            //    AtawTrace.WriteFile(LogType.SubmitSql, sb.ToString());
+                            //    Trace.WriteFile(LogType.SubmitSql, sb.ToString());
                             //}
                             trans.Commit();
 

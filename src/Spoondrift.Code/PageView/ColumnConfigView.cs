@@ -1,11 +1,12 @@
 ﻿using Spoondrift.Code.Config.Form;
+using Spoondrift.Code.PageView.FormViewCreator;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawColumnConfigView
+    public class ColumnConfigView
     {
         public string Name { get; set; }
 

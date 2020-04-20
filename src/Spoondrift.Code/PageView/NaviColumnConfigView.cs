@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawNaviColumnConfigView : AtawColumnConfigView
+    public class NaviColumnConfigView : ColumnConfigView
     {
         public bool IsRefrech { get; set; }
         public bool IsAvailable { get; set; }

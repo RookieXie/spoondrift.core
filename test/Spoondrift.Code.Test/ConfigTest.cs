@@ -56,7 +56,7 @@ namespace Spoondrift.Code.Test
                     //Console.WriteLine(dataForm.Name);
                 });
 
-            AtawBasePageViewCreator pageCreator = provide.GetCodePlugService<AtawBasePageViewCreator>("ListPageView");
+            BasePageViewCreator pageCreator = provide.GetCodePlugService<BasePageViewCreator>("ListPageView");
             pageCreator.Initialize(config, JsonConvert.DeserializeObject<DataSet>(""), null, "", false);
             var apcv = pageCreator.Create();
             Assert.AreEqual("角色", config.Title);

@@ -145,7 +145,7 @@ namespace Spoondrift.Code.Config.Form
             return _val;
         }
 
-        //public AtawInnerPageConfig AtawInnerPage { get; set; }
+        //public InnerPageConfig InnerPage { get; set; }
         public string LinkFormat { get; set; }
 
         public string NormalStyle { get; set; }

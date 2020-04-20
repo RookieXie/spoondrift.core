@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawListPageConfigView : AtawPageConfigView
+    public class ListPageConfigView : PageConfigView
     {
         public string SearchFormName { get; set; }
 

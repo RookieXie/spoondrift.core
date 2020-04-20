@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView.PagePlug
 {
-    public abstract class AtawBasePageViewCreator : IRegName
+    public abstract class BasePageViewCreator : IRegName
     {
         public string CodePlugName { get; set; }
         /// <summary>
@@ -22,20 +22,20 @@ namespace Spoondrift.Code.PageView.PagePlug
         //protected IHttpContextAccessor httpContextAccessor { get; }
         //private IUnitOfDapper fDbContext;
         protected IServiceProvider provider;
-        public AtawBasePageViewCreator(IServiceProvider serviceProvider)
+        public BasePageViewCreator(IServiceProvider serviceProvider)
         {
             provider = serviceProvider;
             //httpContextAccessor = provider.GetService<IHttpContextAccessor>();
 
-            //PageItems = AtawAppContext.Current.PageFlyweight.PageItems;
+            //PageItems = AppContext.Current.PageFlyweight.PageItems;
             //if (!DataXmlPath.IsEmpty())
             //    DataFormConfig = DataXmlPath.PlugInPageGet<DataFormConfig>();
         }
-        protected AtawPageConfigView BasePageView { get; set; }
+        protected PageConfigView BasePageView { get; set; }
 
         public ModuleConfig ModuleConfig { get; set; }
 
-        protected Dictionary<string, AtawFormConfigView> FormViews { get; set; }
+        protected Dictionary<string, FormConfigView> FormViews { get; set; }
 
         protected DataSet PostDataSet { get; set; }
 
@@ -101,7 +101,7 @@ namespace Spoondrift.Code.PageView.PagePlug
 
             //if (moduleConfig.Mode == ModuleMode.MasterDetail)
             //{
-            // AtawDebug.AssertArgumentNull(moduleConfig.Relations, "主从表必须配置Relation", this);
+            // Debug.AssertArgumentNull(moduleConfig.Relations, "主从表必须配置Relation", this);
             //BasePageView.KeyValue = KeyValue;  //主从表修改时，主表主键需要传递给前台
             // }
             #region 非空属性赋值
@@ -127,7 +127,7 @@ namespace Spoondrift.Code.PageView.PagePlug
                     }
                     a.Width = form.Width;
                     string msg = string.Format("数据源为{0}插件的form的名称不能为空", form.DataPlug);
-                    //AtawDebug.AssertNotNullOrEmpty(form.Name, msg, this);
+                    //Debug.AssertNotNullOrEmpty(form.Name, msg, this);
 
                     if (a.Title.IsEmpty())
                         a.Title = dataForm.Title;
@@ -137,8 +137,8 @@ namespace Spoondrift.Code.PageView.PagePlug
                 //if (a is MvcFormConfig)
                 //{
                 //    var mvcForm = a as MvcFormConfig;
-                //    AtawDebug.AssertNotNull(mvcForm.DataRoute, "MvcForm需要配置DataRoute", this);
-                //    var dataRoute = AtawAppContext.Current.MvcConfigXml.DataRoutes.FirstOrDefault(route => route.Name == mvcForm.DataRoute.Name);
+                //    Debug.AssertNotNull(mvcForm.DataRoute, "MvcForm需要配置DataRoute", this);
+                //    var dataRoute = AppContext.Current.MvcConfigXml.DataRoutes.FirstOrDefault(route => route.Name == mvcForm.DataRoute.Name);
                 //    if (dataRoute != null)
                 //    {
                 //        mvcForm.DataRoute.ActionName = dataRoute.ActionName;
@@ -150,19 +150,19 @@ namespace Spoondrift.Code.PageView.PagePlug
                 //    {
                 //        if (mvcForm.DataRoute.ControlName.IsEmpty())
                 //        {
-                //            AtawDebug.AssertNotNullOrEmpty(mvcForm.DataRoute.ControlName, "DataRoute的ControlName不能为空", this);
+                //            Debug.AssertNotNullOrEmpty(mvcForm.DataRoute.ControlName, "DataRoute的ControlName不能为空", this);
                 //        }
                 //        if (mvcForm.DataRoute.ActionName.IsEmpty())
                 //        {
-                //            AtawDebug.AssertNotNullOrEmpty(mvcForm.DataRoute.ActionName, "DataRoute的ActionName不能为空", this);
+                //            Debug.AssertNotNullOrEmpty(mvcForm.DataRoute.ActionName, "DataRoute的ActionName不能为空", this);
                 //        }
                 //        if (mvcForm.DataRoute.AreaName.IsEmpty())
                 //        {
-                //            AtawDebug.AssertNotNullOrEmpty(mvcForm.DataRoute.AreaName, "DataRoute的AreaName不能为空", this);
+                //            Debug.AssertNotNullOrEmpty(mvcForm.DataRoute.AreaName, "DataRoute的AreaName不能为空", this);
                 //        }
                 //        if (mvcForm.DataRoute.NameSpace.IsEmpty())
                 //        {
-                //            AtawDebug.AssertNotNullOrEmpty(mvcForm.DataRoute.NameSpace, "DataRoute的NameSpace不能为空", this);
+                //            Debug.AssertNotNullOrEmpty(mvcForm.DataRoute.NameSpace, "DataRoute的NameSpace不能为空", this);
                 //        }
                 //    }
                 //}
@@ -237,7 +237,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             else
             {
                 var form = moduleConfig.Forms.Find(a => a.Name == FormName);
-                //AtawDebug.AssertNotNull(form, string.Format(ObjectUtil.SysCulture, "请求的formname:  {0}不存在,请检查xml文件是否有问题", FormName), this);
+                //Debug.AssertNotNull(form, string.Format(ObjectUtil.SysCulture, "请求的formname:  {0}不存在,请检查xml文件是否有问题", FormName), this);
                 //var mainForm = form == null ? moduleConfig.Forms.First() : form;//若没有配置主表，则指定第一个为主表
                 //if (PageStyle == PageStyle.Insert || PageStyle == PageStyle.Detail || PageStyle == PageStyle.Update)
                 //{
@@ -258,7 +258,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             BasePageView.ReturnUrl = ModuleConfig.ReturnUrl;
         }
 
-        public virtual AtawPageConfigView Create()
+        public virtual PageConfigView Create()
         {
             //BasePageView.Title = ModuleConfig.Title;
             #region 验证
@@ -296,7 +296,7 @@ namespace Spoondrift.Code.PageView.PagePlug
                         //if (buttonRight != null)
                         //{
                         //    var rightUnit = ModuleConfig.Right.FunctionRights.RightUnits.FirstOrDefault(b => b.Name == buttonRight.Name);
-                        //    //AtawDebug.AssertNotNull(rightUnit, string.Format("需要配置名为{0}的RightUnit", buttonRight.Name), this);
+                        //    //Debug.AssertNotNull(rightUnit, string.Format("需要配置名为{0}的RightUnit", buttonRight.Name), this);
                         //    if (rightUnit.RightType == RightType.MvcFilter)
                         //    {
                         //        var type = RightUtil.RightVerification(rightUnit.RegName);
@@ -327,23 +327,23 @@ namespace Spoondrift.Code.PageView.PagePlug
                 );
             #endregion
 
-            Dictionary<string, AtawFormConfigView> formViewDict = new Dictionary<string, AtawFormConfigView>();
+            Dictionary<string, FormConfigView> formViewDict = new Dictionary<string, FormConfigView>();
             //创建Form
             FormConfigs.ToList().ForEach(form =>
             {
                 FillDataSet(form);
-                AtawBaseFormViewCreator formViewCreator = null;
+                BaseFormViewCreator formViewCreator = null;
                 if (PageStyle != PageStyle.None)
-                    formViewCreator = provider.GetCodePlugService<AtawBaseFormViewCreator>(PageStyle.ToString() + "Form");// (PageStyle.ToString() + "Form").InstanceByPage<AtawBaseFormViewCreator>(form.Name);
+                    formViewCreator = provider.GetCodePlugService<BaseFormViewCreator>(PageStyle.ToString() + "Form");// (PageStyle.ToString() + "Form").InstanceByPage<BaseFormViewCreator>(form.Name);
                 else
                 {
                     form.Action = form.Action == PageStyle.None ? PageStyle.List : form.Action;
                     if (form.Action == PageStyle.Insert)  //ModulePage中如果Form的Action为Insert，则视为Update状态下的批量新增
                     {
-                        formViewCreator = provider.GetCodePlugService<AtawBaseFormViewCreator>("UpdateForm"); //("UpdateForm").InstanceByPage<AtawBaseFormViewCreator>(form.Name);
+                        formViewCreator = provider.GetCodePlugService<BaseFormViewCreator>("UpdateForm"); //("UpdateForm").InstanceByPage<BaseFormViewCreator>(form.Name);
                     }
                     else
-                        formViewCreator = provider.GetCodePlugService<AtawBaseFormViewCreator>(form.Action.ToString() + "Form");// (form.Action.ToString() + "Form").InstanceByPage<AtawBaseFormViewCreator>(form.Name);
+                        formViewCreator = provider.GetCodePlugService<BaseFormViewCreator>(form.Action.ToString() + "Form");// (form.Action.ToString() + "Form").InstanceByPage<BaseFormViewCreator>(form.Name);
                 }
                 formViewCreator.Initialize(ModuleConfig, form, BasePageView);
                 var formViews = formViewCreator.Create();
@@ -359,13 +359,13 @@ namespace Spoondrift.Code.PageView.PagePlug
                 //infoList.Add(info);
             });
 
-            //Dictionary<string, AtawMvcFormConfigView> mvcFormViewDict = new Dictionary<string, AtawMvcFormConfigView>();
+            //Dictionary<string, MvcFormConfigView> mvcFormViewDict = new Dictionary<string, MvcFormConfigView>();
             ////创建MvcForm
             //if (MvcFormConfigs != null)
             //{
             //    MvcFormConfigs.Cast<MvcFormConfig>().ToList().ForEach(a =>
             //    {
-            //        AtawMvcFormConfigView mvcFormView = new AtawMvcFormConfigView();
+            //        MvcFormConfigView mvcFormView = new MvcFormConfigView();
             //        mvcFormView.Title = a.Title;
             //        mvcFormView.Name = a.Name;
             //        mvcFormView.ShowType = a.ShowType;
@@ -375,7 +375,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             //    });
             //}
 
-            //Dictionary<string, AtawSeaFormConfigView> seaFormViewDict = new Dictionary<string, AtawSeaFormConfigView>();
+            //Dictionary<string, SeaFormConfigView> seaFormViewDict = new Dictionary<string, SeaFormConfigView>();
             ////创建MvcForm
             //if (SeaFormConfigs != null)
             //{
@@ -387,7 +387,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             //        }
             //        var _creator = a.Plug.CodePlugIn<ISeaCreator>();
             //        _creator.postDataSet = PostDataSet;
-            //        AtawSeaFormConfigView seaFormView = _creator.create(a);
+            //        SeaFormConfigView seaFormView = _creator.create(a);
             //        seaFormViewDict.Add(seaFormView.Name, seaFormView);
 
             //        //seaFormView.P1 = this.PostDataSet.Tables[0].Compute
@@ -395,13 +395,13 @@ namespace Spoondrift.Code.PageView.PagePlug
             //}
 
 
-            //Dictionary<string, AtawScriptFormConfigView> scriptFormViewDict = new Dictionary<string, AtawScriptFormConfigView>();
+            //Dictionary<string, ScriptFormConfigView> scriptFormViewDict = new Dictionary<string, ScriptFormConfigView>();
             ////创建MvcForm
             //if (ScriptFormConfigs != null)
             //{
             //    ScriptFormConfigs.Cast<ScriptFormConfig>().ToList().ForEach(a =>
             //    {
-            //        AtawScriptFormConfigView scriptFormView = new AtawScriptFormConfigView();
+            //        ScriptFormConfigView scriptFormView = new ScriptFormConfigView();
             //        scriptFormView.Title = a.Title;
             //        scriptFormView.Name = a.Name;
             //        scriptFormView.ShowKind = a.ShowKind;
@@ -538,16 +538,16 @@ namespace Spoondrift.Code.PageView.PagePlug
                 //FirstOrDefault(a => (a.Style & PageStyle) == PageStyle);
                 //BasePageView.Scripts = scripts;
             }
-            BasePageView.Scripts.ForEach(a =>
-            {
-                if (a != null && !a.Path.IsEmpty() && a.Path.IndexOf("/") != 0) //相对路径
-                {
-                    a.Path = string.Format("/Scripts/{0}", a);
-                }
-            });
+            //BasePageView.Scripts.ForEach(a =>
+            //{
+            //    if (a != null && !a.Path.IsEmpty() && a.Path.IndexOf("/") != 0) //相对路径
+            //    {
+            //        a.Path = string.Format("/Scripts/{0}", a);
+            //    }
+            //});
 
-            // BasePageView.PageSourceData = AtawAppContext.Current.PageFlyweight.PageItems["PageSourceData"].Value<string>();
-            //BasePageView.PageCustomerSourceData = AtawAppContext.Current.PageFlyweight.PageItems["PageCustomerSourceData"];
+            // BasePageView.PageSourceData = AppContext.Current.PageFlyweight.PageItems["PageSourceData"].Value<string>();
+            //BasePageView.PageCustomerSourceData = AppContext.Current.PageFlyweight.PageItems["PageCustomerSourceData"];
             return BasePageView;
         }
 
@@ -555,7 +555,7 @@ namespace Spoondrift.Code.PageView.PagePlug
         {
             PageHeader header = new PageHeader();
             header.IsValid = true;
-            //if (!AtawAppContext.Current.IsAuthenticated)
+            //if (!AppContext.Current.IsAuthenticated)
             //{
             //    header.IsValid = false;
             //    header.Message = "未登录";
@@ -568,8 +568,8 @@ namespace Spoondrift.Code.PageView.PagePlug
             //        if (pageStyleRight != null)
             //        {
             //            var rightUnit = ModuleConfig.Right.FunctionRights.RightUnits.FirstOrDefault(a => a.Name == pageStyleRight.Name);
-            //            AtawDebug.AssertNotNull(rightUnit, string.Format("需要配置名为{0}的RightUnit", pageStyleRight.Name), this);
-            //            //if (!AtawAppContext.Current.IsAuthenticated)
+            //            Debug.AssertNotNull(rightUnit, string.Format("需要配置名为{0}的RightUnit", pageStyleRight.Name), this);
+            //            //if (!AppContext.Current.IsAuthenticated)
             //            //{
             //            //    header.IsValid = false;
             //            //    header.Message = "未登录";
@@ -608,16 +608,16 @@ namespace Spoondrift.Code.PageView.PagePlug
                 string columnRightname = form.FormColumnRight.Name;
                 if (form.FormColumnRight.RegName.IsEmpty())
                 {
-                    //AtawDebug.AssertArgumentNullOrEmpty(columnRightname, "FormColumnRight中若没指定RegName,Name属性不能为空", moduleConfig);
+                    //Debug.AssertArgumentNullOrEmpty(columnRightname, "FormColumnRight中若没指定RegName,Name属性不能为空", moduleConfig);
                     columnRight = moduleConfig.Right.ColumnRights.FirstOrDefault(a => a.Name == columnRightname);
-                    //AtawDebug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
+                    //Debug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
                 }
                 else
                 {
                     IColumnRight columnRightPlug = provider.GetCodePlugService<IColumnRight>(form.FormColumnRight.RegName); //form.FormColumnRight.RegName.CodePlugIn<IColumnRight>();
                     columnRightname = columnRightPlug.GetColumnRightName();
                     columnRight = moduleConfig.Right.ColumnRights.FirstOrDefault(a => a.Name == columnRightname);
-                    //AtawDebug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
+                    //Debug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
                 }
                 //if (columnRight.Delete != null)
                 //{
@@ -747,7 +747,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             var dataForm = XmlUtil.PlugGetXml<DataFormConfig>(fc.File); //fc.File.InstanceByPage<DataFormConfig>(fc.Name);
             var keyCols = dataForm.Columns.Where(a => a.IsKey);
             if (keyCols != null)
-                //AtawDebug.Assert(keyCols.ToList().Count == 1, string.Format("{0}只能指定一个主键", fc.File), dataForm);
+                //Debug.Assert(keyCols.ToList().Count == 1, string.Format("{0}只能指定一个主键", fc.File), dataForm);
                 if (dataForm.PrimaryKey.IsEmpty())
                 {
                     dataForm.PrimaryKey = dataForm.Columns.First(col => col.IsKey).Name;
@@ -766,9 +766,9 @@ namespace Spoondrift.Code.PageView.PagePlug
                 {
                     var _ra = _relations1.First();
                     string __relationKey = "_foreignkey_{0}_{1}".SFormat(_ra.MasterForm, _ra.MasterField);
-                    //if (AtawAppContext.Current.GetItem(__relationKey) != null)
+                    //if (AppContext.Current.GetItem(__relationKey) != null)
                     //{
-                    //    _foreignKeyValue = AtawAppContext.Current.GetItem(__relationKey).ToString();
+                    //    _foreignKeyValue = AppContext.Current.GetItem(__relationKey).ToString();
                     //}
                     //else
                     //{
@@ -797,7 +797,7 @@ namespace Spoondrift.Code.PageView.PagePlug
                         string _key = _relation.MasterField;
                         object _value = row.Row[_key];
                         string __relationKey = "_foreignkey_{0}_{1}".SFormat(_relation.MasterForm, _relation.MasterField);
-                       // AtawAppContext.Current.SetItem(__relationKey, _value);
+                       // AppContext.Current.SetItem(__relationKey, _value);
 
                     });
                 }
@@ -893,7 +893,7 @@ namespace Spoondrift.Code.PageView.PagePlug
                 CreatePageStyleButton(pages, PageStyle.Review, true);
             }
 
-            //if (AtawAppContext.Current.ApplicationXml.IsSupportMobile)
+            //if (AppContext.Current.ApplicationXml.IsSupportMobile)
             //{
             //    CustomButtonConfig bt = new CustomButtonConfig();
             //    bt.IsData = false;
@@ -903,7 +903,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             //    ModuleConfig.Buttons.Add(bt);
             //}
 
-            //if (AtawAppContext.Current.ApplicationXml.IsSupportReport)
+            //if (AppContext.Current.ApplicationXml.IsSupportReport)
             //{
             //    CustomButtonConfig bt = new CustomButtonConfig();
             //    bt.IsData = false;
@@ -913,7 +913,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             //    ModuleConfig.Buttons.Add(bt);
             //}
 
-            //if (AtawAppContext.Current.ApplicationXml.IsSupportReport)
+            //if (AppContext.Current.ApplicationXml.IsSupportReport)
             //{
             //    CustomButtonConfig bt = new CustomButtonConfig();
             //    bt.IsData = false;
@@ -943,7 +943,7 @@ namespace Spoondrift.Code.PageView.PagePlug
             }
             else
             {
-                //AtawDebug.AssertArgument(bts.Count() == 1, pageStyle.ToString(), string.Format(ObjectUtil.SysCulture,
+                //Debug.AssertArgument(bts.Count() == 1, pageStyle.ToString(), string.Format(ObjectUtil.SysCulture,
                 
                 var bt = bts.FirstOrDefault();
                 if (!bt.IsData && isData)
@@ -970,6 +970,6 @@ namespace Spoondrift.Code.PageView.PagePlug
 
         public FormConfig FormConfig { get; set; }
 
-        public AtawFormConfigView FormView { get; set; }
+        public FormConfigView FormView { get; set; }
     }
 }

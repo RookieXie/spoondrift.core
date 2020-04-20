@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView.FormViewCreator
 {
-    public abstract class AtawBaseFormViewCreator:IRegName
+    public abstract class BaseFormViewCreator:IRegName
     {
         public string CodePlugName { get; set; }
         /// <summary>
@@ -20,12 +20,12 @@ namespace Spoondrift.Code.PageView.FormViewCreator
         //protected IHttpContextAccessor httpContextAccessor { get; }
         //private IUnitOfDapper fDbContext;
         protected IServiceProvider provider;
-        public AtawBaseFormViewCreator(IServiceProvider serviceProvider)
+        public BaseFormViewCreator(IServiceProvider serviceProvider)
         {
             provider = serviceProvider;
             //httpContextAccessor = provider.GetService<IHttpContextAccessor>();
 
-            //PageItems = AtawAppContext.Current.PageFlyweight.PageItems;
+            //PageItems = AppContext.Current.PageFlyweight.PageItems;
             //if (!DataXmlPath.IsEmpty())
             //    DataFormConfig = DataXmlPath.PlugInPageGet<DataFormConfig>();
         }
@@ -35,21 +35,21 @@ namespace Spoondrift.Code.PageView.FormViewCreator
 
         public PageStyle PageStyle { get; set; }
 
-        public AtawPageConfigView BasePageView { get; set; }
+        public PageConfigView BasePageView { get; set; }
 
         public ModuleConfig ModuleConfig { get; set; }
 
-        protected List<AtawFormConfigView> FormViews { get; set; }
+        protected List<FormConfigView> FormViews { get; set; }
 
-        public void Initialize(ModuleConfig moduleConfig, FormConfig formConfig, AtawPageConfigView basePageView)
+        public void Initialize(ModuleConfig moduleConfig, FormConfig formConfig, PageConfigView basePageView)
         {
             ModuleConfig = moduleConfig;
             FormConfig = formConfig;
             BasePageView = basePageView;
-            FormViews = new List<AtawFormConfigView>();
+            FormViews = new List<FormConfigView>();
         }
 
-        public virtual IEnumerable<AtawFormConfigView> Create()
+        public virtual IEnumerable<FormConfigView> Create()
         {
             DataFormConfig = XmlUtil.PlugGetXml<DataFormConfig>(FormConfig.File); //FormConfig.File.InstanceByPage<DataFormConfig>(FormConfig.Name);
             var dt = provider.GetCodePlugService<IListDataTable>(FormConfig.DataPlug);// FormConfig.DataPlug.InstanceByPage<IListDataTable>(FormConfig.Name);
@@ -110,10 +110,10 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             string columnRightname = form.FormColumnRight.Name;
             if (form.FormColumnRight.RegName.IsEmpty())
             {
-                //AtawDebug.AssertArgumentNullOrEmpty(columnRightname, "FormColumnRight中若没指定RegName,Name属性不能为空", moduleConfig);
+                //Debug.AssertArgumentNullOrEmpty(columnRightname, "FormColumnRight中若没指定RegName,Name属性不能为空", moduleConfig);
 
                 columnRight = moduleConfig.Right.ColumnRights.FirstOrDefault(a => a.Name == columnRightname);
-                //AtawDebug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
+                //Debug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
             }
             else
             {
@@ -122,7 +122,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
                 IColumnRight columnRightPlug = provider.GetCodePlugService<IColumnRight>(form.FormColumnRight.RegName); //form.FormColumnRight.RegName.CodePlugIn<IColumnRight>();
                 columnRightname = columnRightPlug.GetColumnRightName();
                 columnRight = moduleConfig.Right.ColumnRights.FirstOrDefault(a => a.Name == columnRightname);
-                //AtawDebug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
+                //Debug.AssertArgumentNull(columnRight, string.Format("ModuleXml中必须配置名为'{0}'的ColumnRight", columnRightname), moduleConfig);
 
             }
             return columnRight;
@@ -270,9 +270,9 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             }
         }
 
-        protected AtawFormConfigView CreateFormView(DataFormConfig dataForm, FormConfig formConfig)
+        protected FormConfigView CreateFormView(DataFormConfig dataForm, FormConfig formConfig)
         {
-            AtawFormConfigView formView = new AtawFormConfigView();
+            FormConfigView formView = new FormConfigView();
             formView.FormType = formConfig.FormType;
             formView.ShowKind = formConfig.ShowKind;
             formView.AfterInitFunName = formConfig.AfterInitFunName;
@@ -306,7 +306,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             //     List<ColumnConfig> columns = NavigationList.ToList();
             //     foreach (var column in columns)
             //     {
-            //         AtawColumnConfigView colView = new AtawColumnConfigView();
+            //         ColumnConfigView colView = new ColumnConfigView();
             //         if (column.Navigation != null && column.Navigation.IsAvailable == true && (column.ControlType == ControlType.CheckBox || column.ControlType == ControlType.Combo || column.ControlType == ControlType.Radio || column.ControlType == ControlType.TreeSingleSelector || column.ControlType == ControlType.TreeMultiSelector))
             //         {
             //             if (column.ControlType == ControlType.CheckBox)
@@ -368,14 +368,14 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             //if (formView.Name.IsEmpty())
             //    formView.Name = formView.TableName;
             //string msg = string.Format("数据源为{0}插件的form的名称不能为空", formConfig.DataPlug);
-            //AtawDebug.AssertNotNullOrEmpty(formView.Name, msg, this);
-            formView.Columns = new List<AtawColumnConfigView>();
+            //Debug.AssertNotNullOrEmpty(formView.Name, msg, this);
+            formView.Columns = new List<ColumnConfigView>();
             CreateColumns(formView, dataForm, formConfig);
 
-            formView.ColumnGroups = new List<AtawColumnGroupConfigView>();
+            formView.ColumnGroups = new List<ColumnGroupConfigView>();
             CreateGroupColumns(formView, dataForm);
 
-            formView.NavigationColumns = new List<AtawNaviColumnConfigView>(); //可能有多个navi(目前只有一个) 
+            formView.NavigationColumns = new List<NaviColumnConfigView>(); //可能有多个navi(目前只有一个) 
             if (PageStyle == PageStyle.List)
             {
                 var navigation = dataForm.Columns.FindAll(a => a.Navigation != null && a.Navigation.IsAvailable);
@@ -394,18 +394,18 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             }
             return formView;
         }
-        protected virtual AtawNaviColumnConfigView CreateColumnNavigation(AtawColumnConfigView atawColumnConfigView, ColumnConfig columnConfig)
+        protected virtual NaviColumnConfigView CreateColumnNavigation(ColumnConfigView ColumnConfigView, ColumnConfig columnConfig)
         {
-            if (atawColumnConfigView == null || columnConfig == null) { return null; }
+            if (ColumnConfigView == null || columnConfig == null) { return null; }
             try
             {
-                AtawColumnConfigView viewColumn = new AtawColumnConfigView();
-                atawColumnConfigView.ObjectClone<AtawColumnConfigView>(viewColumn);
-                // viewColumn = atawColumnConfigView.c
-                // viewColumn = atawColumnConfigView;
+                ColumnConfigView viewColumn = new ColumnConfigView();
+                ColumnConfigView.ObjectClone<ColumnConfigView>(viewColumn);
+                // viewColumn = ColumnConfigView.c
+                // viewColumn = ColumnConfigView;
 
 
-                AtawNaviColumnConfigView naviViewColumn = new AtawNaviColumnConfigView();
+                NaviColumnConfigView naviViewColumn = new NaviColumnConfigView();
                 naviViewColumn.ChangeEventFun = viewColumn.ChangeEventFun;
                 naviViewColumn.DisplayName = viewColumn.DisplayName;
                 naviViewColumn.Prompt = viewColumn.Prompt;
@@ -480,7 +480,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             }
         }
 
-        protected virtual void CreateColumns(AtawFormConfigView formView, DataFormConfig dataformConfig, FormConfig formConfig)
+        protected virtual void CreateColumns(FormConfigView formView, DataFormConfig dataformConfig, FormConfig formConfig)
         {
             foreach (var column in dataformConfig.Columns)
             {
@@ -503,15 +503,15 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             }
         }
 
-        protected virtual void CreateGroupColumns(AtawFormConfigView formView, DataFormConfig dataformConfig)
+        protected virtual void CreateGroupColumns(FormConfigView formView, DataFormConfig dataformConfig)
         {
             //dataformConfig.ColumnGroups.ForEach(group =>
             //{
-            //    var columnGroup = new AtawColumnGroupConfigView();
+            //    var columnGroup = new ColumnGroupConfigView();
             //    columnGroup.ShowType = group.ShowType == 0 ? "ColShowType".AppKv<int>(4) : group.ShowType;
             //    columnGroup.Name = group.Name;
             //    columnGroup.DisplayName = group.DisplayName;
-            //    columnGroup.Columns = new List<AtawColumnConfigView>();
+            //    columnGroup.Columns = new List<ColumnConfigView>();
             //    var hiddenColCount = 0;
             //    group.Columns.ForEach(col =>
             //    {
@@ -538,9 +538,9 @@ namespace Spoondrift.Code.PageView.FormViewCreator
         }
 
 
-        protected virtual AtawColumnConfigView CreateColumn(AtawFormConfigView formView, ColumnConfig column)
+        protected virtual ColumnConfigView CreateColumn(FormConfigView formView, ColumnConfig column)
         {
-            AtawColumnConfigView colView = new AtawColumnConfigView();
+            ColumnConfigView colView = new ColumnConfigView();
             colView.ControlType = column.ControlType;
             colView.DisplayName = column.DisplayName;
             colView.Prompt = column.Prompt;
@@ -610,8 +610,8 @@ namespace Spoondrift.Code.PageView.FormViewCreator
 
             if (column.ControlType == ControlType.Custom)
             {
-                //AtawDebug.AssertArgumentNull(column.CustomControl, "Custom控件类型需要配置CustomControl", column);
-                //AtawDebug.AssertArgumentNullOrEmpty(column.CustomControl.ControlType, "CustomControl中必须指定自定义控件类型", column);
+                //Debug.AssertArgumentNull(column.CustomControl, "Custom控件类型需要配置CustomControl", column);
+                //Debug.AssertArgumentNullOrEmpty(column.CustomControl.ControlType, "CustomControl中必须指定自定义控件类型", column);
             }
 
             //colView.CustomControl = column.CustomControl;
@@ -627,7 +627,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
 
             string controlRegname = column.ControlType.ToString();
             // to.Options 
-            var optionCreator = provider.GetCodePlugService<AtawOptionCreator>(controlRegname); //controlRegname.CodePlugIn<AtawOptionCreator>();
+            var optionCreator = provider.GetCodePlugService<OptionCreator>(controlRegname); //controlRegname.CodePlugIn<OptionCreator>();
             //初始化
             optionCreator.Initialize(BasePageView, formView, column, PageStyle);
             //方法调用
@@ -635,9 +635,9 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             return colView;
         }
 
-        //protected virtual AtawColumnConfigView CreateColumnNavigation(AtawFormConfigView formView, ColumnConfig column)
+        //protected virtual ColumnConfigView CreateColumnNavigation(FormConfigView formView, ColumnConfig column)
         //{
-        //    AtawColumnConfigView colView = new AtawColumnConfigView();
+        //    ColumnConfigView colView = new ColumnConfigView();
         //    if (column.Navigation != null && column.Navigation.IsAvailable == true && column.ControlType == ControlType.CheckBox)
         //    {
         //        colView.ControlType = ControlType.CheckBoxNavi;
@@ -665,7 +665,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
         //    colView.Kind = column.Kind;
         //    string controlRegname = column.ControlType.ToString();
         //    // to.Options 
-        //    var optionCreator = controlRegname.CodePlugIn<AtawOptionCreator>();
+        //    var optionCreator = controlRegname.CodePlugIn<OptionCreator>();
         //    //初始化
         //    optionCreator.Initialize(BasePageView, formView, column, PageStyle);
         //    //方法调用

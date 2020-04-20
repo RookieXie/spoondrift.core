@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawPageConfigView
+    public class PageConfigView
     {
 
-        public AtawPageConfigView()
+        public PageConfigView()
         {
             DataButtons = new Dictionary<string, CustomButtonConfigView>();
             PageButtons = new Dictionary<string, CustomButtonConfigView>();
@@ -42,10 +42,10 @@ namespace Spoondrift.Code.PageView
         //主从表的主表主键值
         public string KeyValue { get; set; }
 
-        public Dictionary<string, AtawFormConfigView> Forms { get; set; }
-        //public Dictionary<string, AtawSeaFormConfigView> SeaForms { get; set; }
-        //public Dictionary<string, AtawMvcFormConfigView> MvcForms { get; set; }
-       // public Dictionary<string, AtawScriptFormConfigView> ScriptForms { get; set; }
+        public Dictionary<string, FormConfigView> Forms { get; set; }
+        //public Dictionary<string, SeaFormConfigView> SeaForms { get; set; }
+        //public Dictionary<string, MvcFormConfigView> MvcForms { get; set; }
+       // public Dictionary<string, ScriptFormConfigView> ScriptForms { get; set; }
         public List<PanelList> Layout { get; set; }
 
         public IDictionary<string, CustomButtonConfigView> DataButtons { get; set; }

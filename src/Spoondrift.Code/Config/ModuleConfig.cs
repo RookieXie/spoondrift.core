@@ -86,7 +86,7 @@ namespace Spoondrift.Code.Config
             {
                 Forms.ForEach(a =>
                 {
-                    //AtawDebug.AssertArgumentNullOrEmpty(a.Name, " 表单名称不能为空  ", this);
+                    //Debug.AssertArgumentNullOrEmpty(a.Name, " 表单名称不能为空  ", this);
                     if (a is FormConfig)
                     {
                         var b = (FormConfig)a;

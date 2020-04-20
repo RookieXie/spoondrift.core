@@ -51,11 +51,11 @@ namespace Spoondrift.Code.Data
                         DataList.Add(cdm.CodeValue, cdm);
                     }
                 }
-                // AtawAppContext.Current.AtawCache.Set<EnumCodeDataModel>(KEY_NAME + en.Value<int>().ToString(), cdm);
-                //  AtawAppContext.Current.AtawCache.Set<CodeDataModel>(key + en, new CodeDataModel() {  CODE_TEXT});
+                // AppContext.Current.Cache.Set<EnumCodeDataModel>(KEY_NAME + en.Value<int>().ToString(), cdm);
+                //  AppContext.Current.Cache.Set<CodeDataModel>(key + en, new CodeDataModel() {  CODE_TEXT});
 
             }
-            //AtawAppContext.Current.AtawCache.Set<CodeDataModel>(, DataList);
+            //AppContext.Current.Cache.Set<CodeDataModel>(, DataList);
         }
 
         public override IEnumerable<CodeDataModel> FillData(DataSet postDataSet)

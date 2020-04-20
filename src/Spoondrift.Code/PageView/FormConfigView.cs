@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawFormConfigView : AtawBaseFormConfigView
+    public class FormConfigView : BaseFormConfigView
     {
         //public string Name { get; set; }
 
@@ -43,11 +43,11 @@ namespace Spoondrift.Code.PageView
         /// </summary>
         public bool HasNavigation { get; set; }
 
-        public List<AtawColumnConfigView> Columns { get; set; }
+        public List<ColumnConfigView> Columns { get; set; }
 
-       public List<AtawColumnGroupConfigView> ColumnGroups { get; set; }
+       public List<ColumnGroupConfigView> ColumnGroups { get; set; }
 
-        public List<AtawNaviColumnConfigView> NavigationColumns { get; set; }
+        public List<NaviColumnConfigView> NavigationColumns { get; set; }
 
         public PageStyle Action { get; set; }
 

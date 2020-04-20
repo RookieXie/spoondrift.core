@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawColumnGroupConfigView
+    public class ColumnGroupConfigView
     {
         public int ShowType { get; set; }
 
@@ -12,7 +12,7 @@ namespace Spoondrift.Code.PageView
 
         public string DisplayName { get; set; }
 
-        public List<AtawColumnConfigView> Columns { get; set; }
+        public List<ColumnConfigView> Columns { get; set; }
 
         public bool IsHidden { get; set; }
 

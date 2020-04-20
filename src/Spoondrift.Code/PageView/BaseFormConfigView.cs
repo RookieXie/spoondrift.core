@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView
 {
-    public class AtawBaseFormConfigView
+    public class BaseFormConfigView
     {
         public string Name { get; set; }
 

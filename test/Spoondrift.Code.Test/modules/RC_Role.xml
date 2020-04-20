@@ -1,10 +1,10 @@
-<ModuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="D:\Ataw.Schemas\ModuleConfig.xsd">
+<ModuleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="D:\.Schemas\ModuleConfig.xsd">
   <Mode>Single</Mode>
   <Title>角色</Title>
   <Forms>
     <Form Order="0" Title="角色" Name="RC_Role" TableName="RC_Role" FormType="Grid"   HasSearch="true" File="RC_Role.xml" ShowKind="Tile" >
       <DataPlug>EmptyDataTableSource</DataPlug>
-      <ButtonRightPlug>RCRoleButtonRight</ButtonRightPlug>
+      <ButtonRightPlug>DefualtButtonRight</ButtonRightPlug>
       <AfterInitFunName>RCRoleAfterInitFun</AfterInitFunName>
       <Pager>
         <PageSize>10</PageSize>

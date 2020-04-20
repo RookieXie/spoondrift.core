@@ -9,16 +9,16 @@ using System.Text;
 
 namespace Spoondrift.Code.PageView.FormViewCreator
 {
-    [CodePlug("ListForm", BaseClass = typeof(AtawBaseFormViewCreator),
+    [CodePlug("ListForm", BaseClass = typeof(BaseFormViewCreator),
      CreateDate = "2012-12-13", Author = "sj", Description = "ListForm创建插件")]
-    public class AtawListFormViewCreator : AtawBaseFormViewCreator
+    public class ListFormViewCreator : BaseFormViewCreator
     {
-        public AtawListFormViewCreator(IServiceProvider serviceProvider) : base(serviceProvider)
+        public ListFormViewCreator(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             this.PageStyle = Config.PageStyle.List;
         }
 
-        public override IEnumerable<AtawFormConfigView> Create()
+        public override IEnumerable<FormConfigView> Create()
         {
             var formViews = base.Create();
             var formView = formViews.First();
@@ -27,7 +27,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
                 formView.HasPager = true;
             //if (FormConfig.HasSearch)
             //{
-            //    AtawDebug.AssertEnumerableArgumentNull(list, string.Format("{0}查询字段配置", FormConfig.File), this);
+            //    Debug.AssertEnumerableArgumentNull(list, string.Format("{0}查询字段配置", FormConfig.File), this);
             //    formView.HasSearch = true;
             //    var searchFormView = CreateSearchFormView(formView, list.ToList());
             //    var viewList = formViews.ToList();
@@ -50,16 +50,16 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             return formViews;
         }
 
-        private AtawFormConfigView CreateSearchFormView(AtawFormConfigView formView, List<ColumnConfig> columns)
+        private FormConfigView CreateSearchFormView(FormConfigView formView, List<ColumnConfig> columns)
         {
-            AtawFormConfigView searchFormView = new AtawFormConfigView();
+            FormConfigView searchFormView = new FormConfigView();
             searchFormView.FormType = FormType.Normal;
             searchFormView.ShowKind = ShowKind.Tile;
             searchFormView.TableName = formView.TableName + "_SEARCH";
             searchFormView.PrimaryKey = formView.PrimaryKey;
             searchFormView.Title = formView.Title + "查询";
             searchFormView.Name = formView.Name + "_SEARCH";
-            searchFormView.Columns = new List<AtawColumnConfigView>();
+            searchFormView.Columns = new List<ColumnConfigView>();
             foreach (var column in columns)
             {
                 CreateSearchColumn(searchFormView, column);
@@ -67,9 +67,9 @@ namespace Spoondrift.Code.PageView.FormViewCreator
             return searchFormView;
         }
 
-        private void CreateSearchColumn(AtawFormConfigView formView, ColumnConfig column)
+        private void CreateSearchColumn(FormConfigView formView, ColumnConfig column)
         {
-            AtawColumnConfigView colView = new AtawColumnConfigView();
+            ColumnConfigView colView = new ColumnConfigView();
             if (column.IsReadOnly)
             {
                 column.IsReadOnly = false;
@@ -108,7 +108,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
 
             string controlRegname = colView.ControlType.ToString();
             // to.Options 
-            var optionCreator = provider.GetCodePlugService<AtawOptionCreator>(controlRegname);// controlRegname.CodePlugIn<AtawOptionCreator>();
+            var optionCreator = provider.GetCodePlugService<OptionCreator>(controlRegname);// controlRegname.CodePlugIn<OptionCreator>();
             //初始化
             optionCreator.Initialize(BasePageView, formView, column, PageStyle.None);
             //方法调用
@@ -154,7 +154,7 @@ namespace Spoondrift.Code.PageView.FormViewCreator
         }
 
 
-        protected override AtawColumnConfigView CreateColumn(AtawFormConfigView formView, ColumnConfig column)
+        protected override ColumnConfigView CreateColumn(FormConfigView formView, ColumnConfig column)
         {
             var col = base.CreateColumn(formView, column);
 

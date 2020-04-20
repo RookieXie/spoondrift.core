@@ -12,7 +12,7 @@ namespace Spoondrift.Code.Config
         protected FileXmlConfigBase()
         {
             //BasePath = string.Empty;
-            BasePath = ""; //Path.Combine(AtawAppContext.Current.BinPath, AtawApplicationConfig.REAL_PATH);
+            BasePath = ""; //Path.Combine(AppContext.Current.BinPath, ApplicationConfig.REAL_PATH);
         }
         [XmlIgnore]
         public string BasePath { get; set; }

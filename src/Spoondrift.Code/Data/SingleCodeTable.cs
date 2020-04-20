@@ -17,7 +17,7 @@ namespace Spoondrift.Code.Data
 
         public abstract string RegName { get; set; }
 
-        //public virtual AtawDbContext AtawDbContext { get; private set; }
+        //public virtual DbContext DbContext { get; private set; }
 
         public abstract string TableName { get; set; }
 

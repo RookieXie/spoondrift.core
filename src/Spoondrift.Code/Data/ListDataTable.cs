@@ -276,10 +276,10 @@ namespace Spoondrift.Code.Data
                         string _insertKey = GetInsertKey(objectData);
                         //if (string.IsNullOrEmpty(ForeignKey))
                         //{
-                        //    var insertKeys = AtawAppContext.Current.PageFlyweight.PageItems["InsertKeys"] as List<string>;
+                        //    var insertKeys = AppContext.Current.PageFlyweight.PageItems["InsertKeys"] as List<string>;
                         //    if (insertKeys == null)
                         //    {
-                        //        AtawAppContext.Current.PageFlyweight.PageItems.Add("InsertKeys", new List<string> { _insertKey });
+                        //        AppContext.Current.PageFlyweight.PageItems.Add("InsertKeys", new List<string> { _insertKey });
                         //    }
                         //    else
                         //    {
@@ -326,7 +326,7 @@ namespace Spoondrift.Code.Data
                 }
             }
             bool isCheck = CheckPostData(InsertDataViewList, UpdateDataViewList, DeleteStringList);
-            //AtawDebug.Assert(isCheck, "数据源插件{0}，的提交数据验证不通过".AkFormat(RegName), this);
+            //Debug.Assert(isCheck, "数据源插件{0}，的提交数据验证不通过".AkFormat(RegName), this);
         }
 
         public virtual bool CheckPostData(List<ObjectDataView> insertDataViewList, List<ObjectDataView> updateDataViewList, List<string> deleteStringList)
@@ -554,7 +554,7 @@ namespace Spoondrift.Code.Data
         //        resourceInfo.FileNameTitle = pathInfo[1];
         //        resourceInfo.FileSizeK = pathInfo[2].Value<int>();
         //        resourceInfo.StorageConfigName = fileStorageName;
-        //        return AtawAppContext.Current.FastJson.ToJSON(resourceInfo);
+        //        return AppContext.Current.FastJson.ToJSON(resourceInfo);
 
         //    }
         //    return "";
@@ -564,13 +564,13 @@ namespace Spoondrift.Code.Data
         //{
 
         //    //string fileExtension = Path.GetExtension(fileName);
-        //    //string fileID = AtawAppContext.Current.UnitOfData.GetUniId();
+        //    //string fileID = AppContext.Current.UnitOfData.GetUniId();
         //    //int pathID = fileID.Substring(0, 8).Value<int>();
         //    //string relativePath = Path.Combine(FileManagementUtil.GetRelativePath(fileStorageName, pathID),
         //    //    FileManagementUtil.GetFileName(fileStorageName, fileID, fileExtension));
         //    //string fullPath = new Uri(Path.Combine(FileManagementUtil.GetRootPath(fileStorageName, FilePathScheme.Physical), relativePath)).LocalPath;
         //    //FileManagementUtil.ForeDirectories(FileManagementUtil.GetParentDirectory(fullPath));
-        //    //string tempfile = Path.Combine(AtawAppContext.Current.MapPath, Callback.Src(tempPath));
+        //    //string tempfile = Path.Combine(AppContext.Current.MapPath, Callback.Src(tempPath));
 
         //    //if (File.Exists(tempfile))
         //    //{
@@ -603,7 +603,7 @@ namespace Spoondrift.Code.Data
         //        }
         //    });
         //    //var pathInfo = new FilePathInfo { PathID = pathID.ToString(), FileID = fileID, FileExtension = fileExtension };
-        //    return AtawAppContext.Current.FastJson.ToJSON(infoList);
+        //    return AppContext.Current.FastJson.ToJSON(infoList);
         //}
 
         public virtual void SetPostDataRow(ObjectData data, DataAction dataAction, string key)
@@ -620,11 +620,11 @@ namespace Spoondrift.Code.Data
                     //    string fpath = data.Row[a.Name].ToString();
                     //    if (!fpath.IsEmpty())
                     //    {
-                    //        ResourceArrange arrange = AtawAppContext.Current.FastJson.ToObject<ResourceArrange>(fpath);
+                    //        ResourceArrange arrange = AppContext.Current.FastJson.ToObject<ResourceArrange>(fpath);
                     //        if (arrange != null)
                     //        {
                     //            arrange.MoveKeyPath(key, storange);
-                    //            data.Row[a.Name] = AtawAppContext.Current.FastJson.ToJSON(arrange);
+                    //            data.Row[a.Name] = AppContext.Current.FastJson.ToJSON(arrange);
                     //        }
                     //    }
                     //    //data.Row[a.Name] = GetSingleResourceInfo(fpath, a.Upload.StorageName);
@@ -642,11 +642,11 @@ namespace Spoondrift.Code.Data
                     //    string fpath = data.Row[a.Name].ToString();
                     //    if (!fpath.IsEmpty())
                     //    {
-                    //        ResourceArrange arrange = AtawAppContext.Current.FastJson.ToObject<ResourceArrange>(fpath);
+                    //        ResourceArrange arrange = AppContext.Current.FastJson.ToObject<ResourceArrange>(fpath);
                     //        arrange.MoveKeyPath(key, storange);
                     //        if (arrange != null)
                     //        {
-                    //            data.Row[a.Name] = AtawAppContext.Current.FastJson.ToJSON(arrange);
+                    //            data.Row[a.Name] = AppContext.Current.FastJson.ToJSON(arrange);
                     //        }
                     //    }
                     //    // data.Row[a.Name] = GetMultiResourceInfo(fpath, a.Upload.StorageName);
@@ -660,8 +660,8 @@ namespace Spoondrift.Code.Data
                     if (data.MODEFY_COLUMNS.Contains(a.Name))
                     {
                         //string _regname = a.RegName;
-                        //IMomery rr = AtawIocContext.Current.FetchInstance<IMomery>(_regname);
-                        //rr.AddText(data.Row[a.Name].ToString(), AtawAppContext.Current.UnitOfData);
+                        //IMomery rr = IocContext.Current.FetchInstance<IMomery>(_regname);
+                        //rr.AddText(data.Row[a.Name].ToString(), AppContext.Current.UnitOfData);
 
                     }
 
