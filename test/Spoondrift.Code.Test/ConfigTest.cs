@@ -48,17 +48,14 @@ namespace Spoondrift.Code.Test
                     var data = new DataSet();
                     dt.AppendTo(data);//数据获取
                     var dataTable = data.Tables[a.Name];
-                    foreach (DataRow item in dataTable.Rows)
-                    {
-                        // Console.WriteLine(item["FID"]);
-                        var fid = item["FID"];
-                    }
+                   
                     //Console.WriteLine(dataForm.Name);
                 });
 
             BasePageViewCreator pageCreator = provide.GetCodePlugService<BasePageViewCreator>("ListPageView");
             pageCreator.Initialize(config, JsonConvert.DeserializeObject<DataSet>(""), null, "", false);
             var apcv = pageCreator.Create();
+            var json = JsonConvert.SerializeObject(apcv);
             Assert.AreEqual("角色", config.Title);
         }
     }
