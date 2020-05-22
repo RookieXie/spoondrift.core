@@ -100,7 +100,7 @@ namespace Spoondrift.Code.PageView
                 for (int i = 0; i < result.Length; i++)
                 {
                     arrStr = arr[i].Replace("\"", "").Replace("'", "");
-                    if (codeTable[arrStr] != null)
+                    if (codeTable!=null && codeTable[arrStr] != null)
                     {
                         dataText = codeTable[arrStr].CodeText;
                         text = text + dataText + ",";

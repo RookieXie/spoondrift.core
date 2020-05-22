@@ -1204,7 +1204,7 @@ namespace Spoondrift.Code.Data
             if (true) //"IsSysAdditionalTypeFControlUnit".AppKv<bool>(false)
             {
                 if (this.DataFormConfig.TableName.Length > 2 && this.DataFormConfig.TableName.Substring(0, 3) != "WF_")
-                    return "{0} AND FControlUnitID='{1}' AND ((ISDELETE IS NULL) OR (ISDELETE = 0))".SFormat(sql, "");//当前组织id
+                    return "{0} AND FControlUnitID='{1}' AND ((ISDELETE IS NULL) OR (ISDELETE = 0))".SFormat(sql, "1");//当前组织id
                 else
                     return sql;
             }

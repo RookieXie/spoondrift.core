@@ -27,7 +27,7 @@ namespace Spoondrift.Code.Test
             services.AddCodePlugService();
             services.AddScoped<IUnitOfDapper>(p =>
             {
-                return new DapperContext("server=118.24.146.107;port=3306;uid=root;pwd=fengyan1992;database=Spoondrift;Min Pool Size=0;Pooling=true;connect timeout=120;CharSet=utf8mb4;SslMode=none;");
+                return new DapperContext("server=118.24.146.107;port=3306;uid=root;pwd=mypassword;database=Spoondrift;Min Pool Size=0;Pooling=true;connect timeout=120;CharSet=utf8mb4;SslMode=none;");
             });
             services.AddScoped<Xml2DB>();
             var provide = services.BuildServiceProvider();
